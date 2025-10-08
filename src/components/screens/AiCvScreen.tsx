@@ -9,14 +9,7 @@ interface AiCvScreenProps {
 
 const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
   <div className="flex h-full flex-col bg-white">
-    <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
-      <Button
-        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition duration-200 hover:shadow-xl"
-        onClick={onBack}
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Home
-      </Button>
+    <div className="px-6 pb-3 pt-5">
       <h2 className="text-lg font-extrabold text-gray-800">AI CV Builder</h2>
     </div>
 
@@ -46,7 +39,14 @@ const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
       </motion.button>
     </div>
 
-    <div className="px-6 pb-6">
+    <div className="space-y-3 px-6 pb-6">
+      <Button
+        className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
+        onClick={onBack}
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Home
+      </Button>
       <Button
         className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-white shadow-lg transition hover:shadow-xl"
         onClick={onContinue}
