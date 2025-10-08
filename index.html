@@ -7,23 +7,6 @@
   </head>
   <body class="bg-slate-100">
     <div id="root"></div>
-    <script>
-      (function () {
-        const entryScript = document.querySelector(
-          'script[type="module"][data-entry]'
-        );
-        const isGitHubPages =
-          typeof window !== "undefined" &&
-          window.location.hostname.endsWith("github.io");
-        if (
-          isGitHubPages &&
-          entryScript &&
-          entryScript.getAttribute("src")?.includes("src/main.tsx")
-        ) {
-          window.location.replace("./docs/index.html");
-        }
-      })();
-    </script>
-    <script type="module" data-entry src="./src/main.tsx"></script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
