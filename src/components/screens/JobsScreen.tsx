@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { cn } from "../../utils/cn";
 
 interface JobsScreenProps {
@@ -144,8 +145,6 @@ const jobSections: JobSection[] = [
 const JobsScreen = ({ onBack }: JobsScreenProps) => {
   const [activeSectionId, setActiveSectionId] = useState(jobSections[0].id);
 
-  const activeSection = jobSections.find((section) => section.id === activeSectionId) ?? jobSections[0];
-
   return (
     <div className="flex min-h-dvh flex-col bg-gray-50">
       <div className="px-4 pb-3 pt-4">
@@ -169,16 +168,15 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
             </CardContent>
           </Card>
 
-          <div className="rounded-full bg-white/70 p-1 shadow-inner">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <Tabs value={activeSectionId} onValueChange={setActiveSectionId} className="space-y-4">
+            <TabsList className="grid grid-cols-1 gap-2 rounded-full bg-white/70 p-1 shadow-inner sm:grid-cols-2">
               {jobSections.map((section) => {
                 const isActive = activeSectionId === section.id;
 
                 return (
-                  <button
+                  <TabsTrigger
                     key={section.id}
-                    type="button"
-                    onClick={() => setActiveSectionId(section.id)}
+                    value={section.id}
                     className={cn(
                       "rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
                       isActive
@@ -186,49 +184,55 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
                         : "border border-transparent bg-white/90 text-gray-600 shadow-sm hover:border-gray-200 hover:bg-gray-50"
                     )}
                   >
-                    <span className={cn("text-[10px] uppercase tracking-[0.2em]", isActive ? "text-white/70" : "text-gray-400")}>Opportunities</span>
+                    <span className={cn("text-[10px] uppercase tracking-[0.2em]", isActive ? "text-white/70" : "text-gray-400")}>
+                      Opportunities
+                    </span>
                     <p className="mt-1 text-sm font-semibold leading-tight">
                       {section.label}
                     </p>
                     <p className={cn("mt-1 text-xs leading-snug", isActive ? "text-white/80" : "text-gray-500")}>{section.summary}</p>
-                  </button>
+                  </TabsTrigger>
                 );
               })}
-            </div>
-          </div>
+            </TabsList>
 
-          <Card className={cn("overflow-hidden rounded-3xl border-0 text-white shadow-lg", "bg-gradient-to-br", activeSection.gradient)}>
-            <CardContent className="space-y-3 p-5">
-              <span className="text-[10px] uppercase tracking-[0.2em] text-white/70">Opportunity focus</span>
-              <h3 className="text-lg font-semibold leading-tight">{activeSection.label}</h3>
-              <p className="text-sm text-white/80">{activeSection.summary}</p>
-              <div className="flex flex-wrap gap-2">
-                {activeSection.insights.map((insight) => (
-                  <span key={insight} className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium text-white">
-                    {insight}
-                  </span>
+            {jobSections.map((section) => (
+              <TabsContent key={section.id} value={section.id} className="space-y-4">
+                <Card className={cn("overflow-hidden rounded-3xl border-0 text-white shadow-lg", "bg-gradient-to-br", section.gradient)}>
+                  <CardContent className="space-y-3 p-5">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-white/70">Opportunity focus</span>
+                    <h3 className="text-lg font-semibold leading-tight">{section.label}</h3>
+                    <p className="text-sm text-white/80">{section.summary}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {section.insights.map((insight) => (
+                        <span key={insight} className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium text-white">
+                          {insight}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {section.jobs.map((job) => (
+                  <Card
+                    key={`${section.id}-${job.title}`}
+                    className="rounded-3xl border-0 bg-white/90 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+                  >
+                    <CardContent className="space-y-3 p-5">
+                      <h3 className="text-lg font-semibold text-gray-800">{job.title}</h3>
+                      <p className="text-sm text-gray-500">
+                        {job.company} • {job.location}
+                      </p>
+                      <p className="text-sm text-gray-600">{job.description}</p>
+                      <Button className={cn("w-full rounded-2xl bg-gradient-to-r py-2 text-white shadow hover:brightness-110", section.ctaGradient)}>
+                        Apply now
+                      </Button>
+                    </CardContent>
+                  </Card>
                 ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {activeSection.jobs.map((job) => (
-            <Card
-              key={`${activeSection.id}-${job.title}`}
-              className="rounded-3xl border-0 bg-white/90 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <CardContent className="space-y-3 p-5">
-                <h3 className="text-lg font-semibold text-gray-800">{job.title}</h3>
-                <p className="text-sm text-gray-500">
-                  {job.company} • {job.location}
-                </p>
-                <p className="text-sm text-gray-600">{job.description}</p>
-                <Button className={cn("w-full rounded-2xl bg-gradient-to-r py-2 text-white shadow hover:brightness-110", activeSection.ctaGradient)}>
-                  Apply now
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
 
         <div className="mt-8">
