@@ -45,7 +45,7 @@ const jobs = [
 ];
 
 const JobsScreen = ({ onBack }: JobsScreenProps) => (
-  <div className="flex h-full flex-col bg-gray-50">
+  <div className="flex min-h-dvh flex-col bg-gray-50">
     <div className="px-4 pb-3 pt-4">
       <h2 className="text-lg font-bold text-gray-800">Available Jobs</h2>
     </div>
@@ -83,7 +83,7 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => (
       </div>
     </div>
 
-    <div className="shrink-0 border-t border-white/60 bg-gray-50/95 px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
+    <div className="sticky bottom-0 z-10 shrink-0 border-t border-white/60 bg-gray-50/95 px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
       <Button
         className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
         onClick={onBack}

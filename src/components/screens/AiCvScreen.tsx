@@ -8,7 +8,7 @@ interface AiCvScreenProps {
 }
 
 const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
-  <div className="flex h-full flex-col bg-white">
+  <div className="flex min-h-dvh flex-col bg-white">
     <div className="px-6 pb-3 pt-5">
       <h2 className="text-lg font-extrabold text-gray-800">AI CV Builder</h2>
     </div>
@@ -42,7 +42,7 @@ const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
       </div>
     </div>
 
-    <div className="shrink-0 border-t border-white/60 bg-white/95 px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <div className="sticky bottom-0 z-10 shrink-0 border-t border-white/60 bg-white/95 px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="space-y-3">
         <Button
           className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
