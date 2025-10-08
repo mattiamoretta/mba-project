@@ -10,14 +10,14 @@ interface CvPreviewScreenProps {
 const skills = ["Solar PV", "Heat Pumps", "KNX", "Wiring", "Troubleshooting", "Blueprints", "Italian/English"];
 
 const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenProps) => (
-  <div className="flex h-full flex-col bg-gray-50">
+  <div className="flex min-h-dvh flex-col bg-gray-50">
     <div className="px-5 pb-3 pt-5">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-gray-800">Your CV is ready</h2>
         <span className="text-xs text-gray-500">ATS‑friendly</span>
       </div>
     </div>
-    <div className="flex-1 overflow-y-auto px-5 pb-10">
+    <div className="flex-1 overflow-y-auto px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
       <Card className="rounded-3xl border-0 bg-white shadow-sm">
         <CardContent className="space-y-4 p-5">
             <div className="flex items-start justify-between">
@@ -72,11 +72,10 @@ const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenPro
                 <li>KNX Partner</li>
               </ul>
             </section>
-          </CardContent>
+        </CardContent>
       </Card>
-    </div>
-    <div className="shrink-0 border-t border-white/60 bg-gray-50/95 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
-      <div className="space-y-3">
+
+      <div className="mt-8 space-y-3 pb-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Button className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 py-3 text-white shadow transition hover:bg-emerald-700">
             <Upload className="w-4 h-4" /> Upload CV
@@ -94,7 +93,7 @@ const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenPro
             Edit recording
           </Button>
           <Button
-            className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 py-3 text-white shadow transition hover:shadow-lg"
+            className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 py-3 text-white shadow"
             onClick={onBackToHome}
           >
             <ArrowLeft className="h-4 w-4" />

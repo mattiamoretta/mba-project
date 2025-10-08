@@ -50,7 +50,7 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => (
       <h2 className="text-lg font-bold text-gray-800">Available Jobs</h2>
     </div>
 
-    <div className="flex-1 overflow-y-auto px-4 pb-10">
+    <div className="flex-1 overflow-y-auto px-4 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
       <div className="space-y-4">
         <Card className="overflow-hidden rounded-3xl border-0 shadow-md">
           <CardContent className="p-0">
@@ -81,16 +81,16 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => (
           </Card>
         ))}
       </div>
-    </div>
 
-    <div className="sticky bottom-0 z-10 shrink-0 border-t border-white/60 bg-gray-50/95 px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
-      <Button
-        className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
-        onClick={onBack}
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Home
-      </Button>
+      <div className="mt-8">
+        <Button
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm"
+          onClick={onBack}
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Button>
+      </div>
     </div>
   </div>
 );
