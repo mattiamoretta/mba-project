@@ -11,25 +11,11 @@ const skills = ["Solar PV", "Heat Pumps", "KNX", "Wiring", "Troubleshooting", "B
 
 const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenProps) => (
   <div className="flex h-full flex-col bg-gray-50">
-    <div className="flex items-center justify-between gap-3 px-5 pb-3 pt-5">
-      <Button
-        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition duration-200 hover:shadow-xl"
-        onClick={onBackToHome}
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Home
-      </Button>
-      <Button
-        className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-300 hover:bg-indigo-50"
-        onClick={onBackToRecording}
-      >
-        <PencilLine className="h-4 w-4" />
-        Edit recording
-      </Button>
-    </div>
-    <div className="flex items-center justify-between px-5 pb-3">
-      <h2 className="text-lg font-bold text-gray-800">Your CV is ready</h2>
-      <span className="text-xs text-gray-500">ATS‑friendly</span>
+    <div className="px-5 pb-3 pt-5">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-bold text-gray-800">Your CV is ready</h2>
+        <span className="text-xs text-gray-500">ATS‑friendly</span>
+      </div>
     </div>
     <div className="flex-1 overflow-y-auto px-5 pb-4">
       <Card className="rounded-3xl border-0 bg-white shadow-sm">
@@ -90,13 +76,31 @@ const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenPro
       </Card>
     </div>
 
-    <div className="mt-auto grid grid-cols-2 gap-3 px-5 pb-6">
-      <Button className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 py-3 text-white shadow transition hover:bg-emerald-700">
-        <Upload className="w-4 h-4" /> Upload CV
-      </Button>
-      <Button className="flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white py-3 text-gray-700 shadow-sm transition hover:bg-gray-100">
-        <Download className="w-4 h-4" /> Export PDF
-      </Button>
+    <div className="mt-auto space-y-3 px-5 pb-6">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <Button className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 py-3 text-white shadow transition hover:bg-emerald-700">
+          <Upload className="w-4 h-4" /> Upload CV
+        </Button>
+        <Button className="flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white py-3 text-gray-700 shadow-sm transition hover:bg-gray-100">
+          <Download className="w-4 h-4" /> Export PDF
+        </Button>
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <Button
+          className="flex items-center justify-center gap-2 rounded-full border border-indigo-200 bg-white py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-300 hover:bg-indigo-50"
+          onClick={onBackToRecording}
+        >
+          <PencilLine className="h-4 w-4" />
+          Edit recording
+        </Button>
+        <Button
+          className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 py-3 text-white shadow transition hover:shadow-lg"
+          onClick={onBackToHome}
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Button>
+      </div>
     </div>
   </div>
 );
