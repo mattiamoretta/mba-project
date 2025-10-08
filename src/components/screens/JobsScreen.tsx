@@ -184,13 +184,14 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
                         : "border border-transparent bg-white/90 text-gray-600 shadow-sm hover:border-gray-200 hover:bg-gray-50"
                     )}
                   >
-                    <span className={cn("text-[10px] uppercase tracking-[0.2em]", isActive ? "text-white/70" : "text-gray-400")}>
-                      Opportunities
-                    </span>
-                    <p className="mt-1 text-sm font-semibold leading-tight">
+                    <p
+                      className={cn(
+                        "text-sm font-semibold leading-tight",
+                        isActive ? "text-white" : "text-gray-700"
+                      )}
+                    >
                       {section.label}
                     </p>
-                    <p className={cn("mt-1 text-xs leading-snug", isActive ? "text-white/80" : "text-gray-500")}>{section.summary}</p>
                   </TabsTrigger>
                 );
               })}
