@@ -12,6 +12,7 @@ interface Job {
   title: string;
   company: string;
   location: string;
+  description: string;
 }
 
 interface JobSection {
@@ -19,6 +20,8 @@ interface JobSection {
   label: string;
   summary: string;
   insights: string[];
+  gradient: string;
+  ctaGradient: string;
   jobs: Job[];
 }
 
@@ -26,37 +29,44 @@ const allJobs: Job[] = [
   {
     title: "Electrician for Solar Panel Installation",
     company: "Green Energy Co.",
-    location: "Milan"
+    location: "Milan",
+    description: "Install, cable and commission new-build rooftop solar arrays for SME clients."
   },
   {
     title: "Plumber for Smart Housing Project",
     company: "EcoBuild",
-    location: "Rome"
+    location: "Rome",
+    description: "Lead greywater and smart-meter plumbing upgrades within a connected housing pilot."
   },
   {
     title: "HVAC Technician for Office Retrofit",
     company: "ClimaTech",
-    location: "Turin"
+    location: "Turin",
+    description: "Balance airflow, tune BMS schedules and handover retrofit documentation for offices."
   },
   {
     title: "Heat Pump Installer (Residential)",
     company: "EcoTherm",
-    location: "Verona"
+    location: "Verona",
+    description: "Install and commission monobloc and split heat pumps for multi-family buildings."
   },
   {
     title: "Rooftop PV Mounting Specialist",
     company: "SunMount",
-    location: "Bologna"
+    location: "Bologna",
+    description: "Plan safe access and assemble substructures for complex PV rooftops and facades."
   },
   {
     title: "Smart Home Electrician (KNX)",
     company: "Domotix",
-    location: "Milan"
+    location: "Milan",
+    description: "Integrate KNX devices and sync energy dashboards with existing solar storage systems."
   },
   {
     title: "Junior Plumber (Apprenticeship)",
     company: "AquaFlow",
-    location: "Rome"
+    location: "Rome",
+    description: "Support senior crews on piping layouts, leak checks and connected fixtures installation."
   }
 ];
 
@@ -66,10 +76,12 @@ const jobSections: JobSection[] = [
     label: "All opportunities",
     summary: "Browse every open role from our network of sustainable construction partners.",
     insights: [
-      "Example: 7 active postings from Milan, Rome and beyond.",
-      "Interviews typically scheduled within 3 business days.",
-      "Profiles with updated AI CVs get 2x more callbacks."
+      "7 live projects across Milan, Rome & Verona",
+      "Interviews within three business days",
+      "AI CVs receive 2× more callbacks"
     ],
+    gradient: "from-indigo-600/95 via-purple-600/90 to-blue-500/85",
+    ctaGradient: "from-indigo-600 to-purple-600",
     jobs: allJobs
   },
   {
@@ -77,10 +89,12 @@ const jobSections: JobSection[] = [
     label: "Solar & Smart Electrical",
     summary: "Grid-ready teams needed for rooftop PV, storage and KNX integrations.",
     insights: [
-      "Example: bundled projects combine inverter setup + smart home commissioning.",
-      "Shift demand toward Milan and Bologna industrial parks.",
-      "Shortlists close every Friday at 17:00 CET."
+      "Bundled PV + storage commissioning",
+      "Demand spike in Milan & Bologna",
+      "Shortlists close Fridays 17:00 CET"
     ],
+    gradient: "from-amber-500/95 via-orange-500/90 to-pink-500/85",
+    ctaGradient: "from-amber-500 to-pink-500",
     jobs: allJobs.filter((job) =>
       [
         "Electrician for Solar Panel Installation",
@@ -94,10 +108,12 @@ const jobSections: JobSection[] = [
     label: "HVAC & Heating",
     summary: "Support large retrofits with specialists across heating and cooling systems.",
     insights: [
-      "Example: office retrofits in Turin require commissioning next month.",
-      "Heat pump deployments funded by REPowerEU subsidies.",
-      "Technicians with F-Gas certification preferred."
+      "Office retrofits onboarding in Turin",
+      "REPowerEU funded heat pump installs",
+      "F-Gas licences prioritised"
     ],
+    gradient: "from-sky-500/95 via-blue-500/90 to-indigo-500/85",
+    ctaGradient: "from-sky-500 to-indigo-500",
     jobs: allJobs.filter((job) =>
       [
         "HVAC Technician for Office Retrofit",
@@ -110,10 +126,12 @@ const jobSections: JobSection[] = [
     label: "Plumbing & Water Systems",
     summary: "Smart housing pilots need experienced and emerging plumbing talent.",
     insights: [
-      "Example: Rome smart districts upgrading greywater recycling lines.",
-      "Mentorship track pairs senior plumbers with apprentices.",
-      "Site visits happen on Tuesdays and Thursdays."
+      "Rome smart districts upgrading greywater",
+      "Mentorship pairings for apprentices",
+      "Site visits on Tuesdays & Thursdays"
     ],
+    gradient: "from-emerald-500/95 via-green-500/90 to-lime-500/80",
+    ctaGradient: "from-emerald-500 to-green-500",
     jobs: allJobs.filter((job) =>
       [
         "Plumber for Smart Housing Project",
@@ -151,40 +169,46 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
             </CardContent>
           </Card>
 
-          <div className="rounded-3xl border border-indigo-100 bg-white/80 p-3 shadow-sm">
-            <div className="flex gap-2 overflow-x-auto pb-1">
-              {jobSections.map((section) => (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => setActiveSectionId(section.id)}
-                  className={cn(
-                    "whitespace-nowrap rounded-full border px-4 py-2 text-xs font-medium transition",
-                    activeSectionId === section.id
-                      ? "border-indigo-500 bg-indigo-50 text-indigo-600 shadow"
-                      : "border-transparent bg-white text-gray-600 shadow-sm hover:bg-indigo-50/70"
-                  )}
-                >
-                  {section.label}
-                </button>
-              ))}
+          <div className="rounded-full bg-white/70 p-1 shadow-inner">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {jobSections.map((section) => {
+                const isActive = activeSectionId === section.id;
+
+                return (
+                  <button
+                    key={section.id}
+                    type="button"
+                    onClick={() => setActiveSectionId(section.id)}
+                    className={cn(
+                      "rounded-2xl px-4 py-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
+                      isActive
+                        ? cn("text-white shadow-lg", "bg-gradient-to-br", section.gradient)
+                        : "border border-transparent bg-white/90 text-gray-600 shadow-sm hover:border-gray-200 hover:bg-gray-50"
+                    )}
+                  >
+                    <span className={cn("text-[10px] uppercase tracking-[0.2em]", isActive ? "text-white/70" : "text-gray-400")}>Opportunities</span>
+                    <p className="mt-1 text-sm font-semibold leading-tight">
+                      {section.label}
+                    </p>
+                    <p className={cn("mt-1 text-xs leading-snug", isActive ? "text-white/80" : "text-gray-500")}>{section.summary}</p>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          <Card className="rounded-3xl border-0 bg-white/90 shadow-md">
+          <Card className={cn("overflow-hidden rounded-3xl border-0 text-white shadow-lg", "bg-gradient-to-br", activeSection.gradient)}>
             <CardContent className="space-y-3 p-5">
-              <div>
-                <p className="text-sm font-semibold text-indigo-700">{activeSection.label}</p>
-                <p className="mt-1 text-sm text-gray-600">{activeSection.summary}</p>
-              </div>
-              <ul className="space-y-2 text-xs text-gray-500">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/70">Opportunity focus</span>
+              <h3 className="text-lg font-semibold leading-tight">{activeSection.label}</h3>
+              <p className="text-sm text-white/80">{activeSection.summary}</p>
+              <div className="flex flex-wrap gap-2">
                 {activeSection.insights.map((insight) => (
-                  <li key={insight} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-400" />
-                    <span>{insight}</span>
-                  </li>
+                  <span key={insight} className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium text-white">
+                    {insight}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </CardContent>
           </Card>
 
@@ -198,7 +222,8 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
                 <p className="text-sm text-gray-500">
                   {job.company} • {job.location}
                 </p>
-                <Button className="w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 py-2 text-white shadow hover:brightness-110">
+                <p className="text-sm text-gray-600">{job.description}</p>
+                <Button className={cn("w-full rounded-2xl bg-gradient-to-r py-2 text-white shadow hover:brightness-110", activeSection.ctaGradient)}>
                   Apply now
                 </Button>
               </CardContent>
