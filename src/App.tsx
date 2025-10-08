@@ -23,9 +23,9 @@ function App() {
   }
 
   return (
-    <div className="flex h-full min-h-screen flex-col overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="flex min-h-dvh flex-col bg-gradient-to-br from-gray-100 to-gray-200">
       <Header />
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-y-auto">
         {screen === "home" && <HomeScreen onNavigate={setScreen} />}
         {screen === "jobs" && <JobsScreen onBack={() => setScreen("home")} />}
         {screen === "professionals" && (
