@@ -153,21 +153,6 @@ const JobsScreen = ({ onBack }: JobsScreenProps) => {
 
       <div className="flex-1 overflow-y-auto px-4 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
         <div className="space-y-4">
-          <Card className="overflow-hidden rounded-3xl border-0 shadow-md">
-            <CardContent className="p-0">
-              <div className="relative h-40 w-full bg-gradient-to-br from-blue-50 via-white to-green-50">
-                <div className="absolute left-10 top-8 h-3 w-3 rounded-full bg-indigo-600 shadow" title="Milan" />
-                <div className="absolute left-40 top-16 h-3 w-3 rounded-full bg-emerald-600 shadow" title="Verona" />
-                <div className="absolute left-24 top-28 h-3 w-3 rounded-full bg-pink-600 shadow" title="Bologna" />
-                <div className="absolute right-10 top-12 h-3 w-3 rounded-full bg-yellow-600 shadow" title="Venice" />
-                <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 border-t bg-white/90 p-2 text-xs text-gray-700">
-                  <span className="font-medium">Nearby demand:</span>
-                  <span>• Electrician • Plumber • HVAC</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
           <Tabs value={activeSectionId} onValueChange={setActiveSectionId} className="space-y-4">
             <TabsList className="grid grid-cols-1 gap-2 rounded-full bg-white/70 p-1 shadow-inner sm:grid-cols-2">
               {jobSections.map((section) => {
