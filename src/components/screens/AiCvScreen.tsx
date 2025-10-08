@@ -13,8 +13,8 @@ const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
       <h2 className="text-lg font-extrabold text-gray-800">AI CV Builder</h2>
     </div>
 
-    <div className="flex-1 overflow-y-auto">
-      <div className="space-y-6 px-6 pb-32 text-sm text-gray-700">
+    <div className="flex-1 overflow-y-auto px-6 pb-10 text-sm text-gray-700">
+      <div className="space-y-6">
         <div>
           <p className="text-gray-600">Why it’s super fancy:</p>
           <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -40,23 +40,24 @@ const AiCvScreen = ({ onBack, onContinue }: AiCvScreenProps) => (
           </motion.button>
         </div>
       </div>
-      <div className="sticky inset-x-0 bottom-0 border-t border-white/60 bg-white/95 px-6 pb-6 pt-4 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <div className="space-y-3">
-          <Button
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
-            onClick={onBack}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Button>
-          <Button
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-white shadow-lg transition hover:shadow-xl"
-            onClick={onContinue}
-          >
-            Continue to preview
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </div>
+    </div>
+
+    <div className="border-t border-white/60 bg-white/95 px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+      <div className="space-y-3">
+        <Button
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-indigo-100 bg-white px-6 py-3 text-sm font-medium text-indigo-600 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
+          onClick={onBack}
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Button>
+        <Button
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 text-white shadow-lg transition hover:shadow-xl"
+          onClick={onContinue}
+        >
+          Continue to preview
+          <ArrowRight className="h-4 w-4" />
+        </Button>
       </div>
     </div>
   </div>
