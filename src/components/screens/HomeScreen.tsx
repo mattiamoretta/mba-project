@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Mic, Search, TrendingUp, Users, Zap, ShieldCheck, Clock } from "lucide-react";
 import { Input } from "../ui/input";
@@ -34,6 +34,7 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
 
   const [highlightIndex, setHighlightIndex] = useState(0);
   const [showTrends, setShowTrends] = useState(false);
+  const searchRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -43,17 +44,55 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
     return () => window.clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowTrends(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <div className="space-y-4 overflow-y-auto px-4 pb-6 pt-4">
-        <div className="flex items-center gap-2 rounded-2xl bg-white/70 p-2 shadow-sm backdrop-blur">
-          <Input
-            placeholder="Search for jobs or professionals..."
-            className="flex-1 rounded-xl border-none bg-transparent text-sm focus-visible:ring-0"
-          />
-          <Button className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow">
-            <Search className="h-4 w-4" />
-          </Button>
+        <div ref={searchRef} className="relative rounded-2xl bg-white/70 p-2 shadow-sm backdrop-blur">
+          <div className="flex items-center gap-2">
+            <Input
+              placeholder="Search for jobs or professionals..."
+              className="flex-1 rounded-xl border-none bg-transparent text-sm focus-visible:ring-0"
+              onFocus={() => setShowTrends(true)}
+            />
+            <Button
+              className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow"
+              onClick={() => setShowTrends(true)}
+            >
+              <Search className="h-4 w-4" />
+            </Button>
+          </div>
+          {showTrends && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              className="absolute left-0 right-0 top-full z-10 mt-2 rounded-2xl border bg-white p-3 text-left shadow-xl"
+            >
+              <div className="flex items-center gap-2 text-sm font-semibold text-gray-800">
+                <TrendingUp className="h-4 w-4" /> Trending searches
+              </div>
+              <ul className="mt-2 space-y-1 text-xs text-gray-600">
+                <li>• Electrician (solar)</li>
+                <li>• Plumber (smart housing)</li>
+                <li>• HVAC technician</li>
+                <li>• Heat pump installer</li>
+              </ul>
+            </motion.div>
+          )}
         </div>
 
         <Card
@@ -75,11 +114,7 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
         </Card>
 
         <div className="grid grid-cols-2 gap-4">
-          <div
-            className="relative"
-            onMouseEnter={() => setShowTrends(true)}
-            onMouseLeave={() => setShowTrends(false)}
-          >
+          <div>
             <Card
               className="h-full cursor-pointer rounded-3xl border-0 bg-white/80 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               onClick={() => onNavigate("jobs")}
@@ -89,24 +124,6 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
                 <span className="text-sm font-semibold text-gray-700">Find Jobs</span>
               </CardContent>
             </Card>
-            {showTrends && (
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 6 }}
-                className="absolute -bottom-2 left-1/2 z-10 w-56 -translate-x-1/2 translate-y-full rounded-2xl border bg-white p-3 text-left shadow-xl"
-              >
-                <div className="flex items-center gap-2 text-sm font-semibold text-gray-800">
-                  <TrendingUp className="h-4 w-4" /> Trending searches
-                </div>
-                <ul className="mt-2 space-y-1 text-xs text-gray-600">
-                  <li>• Electrician (solar)</li>
-                  <li>• Plumber (smart housing)</li>
-                  <li>• HVAC technician</li>
-                  <li>• Heat pump installer</li>
-                </ul>
-              </motion.div>
-            )}
           </div>
 
           <Card
