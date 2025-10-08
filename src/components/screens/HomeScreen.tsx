@@ -30,6 +30,24 @@ const highlights = [
   }
 ];
 
+const featuredProfessionals = [
+  {
+    name: "Marco Rossi",
+    role: "Senior Electrician",
+    location: "Milan, IT"
+  },
+  {
+    name: "Sofia Conti",
+    role: "Smart Home Electrician",
+    location: "Turin, IT"
+  },
+  {
+    name: "Chiara Verdi",
+    role: "HVAC Engineer",
+    location: "Turin, IT"
+  }
+];
+
 const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
 
   const [highlightIndex, setHighlightIndex] = useState(0);
@@ -65,7 +83,7 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
           <div className="flex items-center gap-2">
             <Input
               placeholder="Search for jobs or professionals..."
-              className="flex-1 rounded-xl border-none bg-transparent text-sm focus-visible:ring-0"
+              className="flex-1 rounded-xl border-none bg-transparent text-base focus-visible:ring-0"
               onFocus={() => setShowTrends(true)}
             />
             <Button
@@ -91,6 +109,28 @@ const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
                 <li>• HVAC technician</li>
                 <li>• Heat pump installer</li>
               </ul>
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-indigo-700">
+                  <Users className="h-4 w-4" /> Featured professionals
+                </div>
+                {featuredProfessionals.map((professional) => (
+                  <button
+                    key={professional.name}
+                    type="button"
+                    onClick={() => {
+                      setShowTrends(false);
+                      onNavigate("professionals");
+                    }}
+                    className="flex w-full items-center justify-between rounded-xl border border-indigo-100 bg-indigo-50/70 px-3 py-2 text-left shadow-sm transition hover:bg-indigo-100"
+                  >
+                    <div>
+                      <p className="text-sm font-semibold text-indigo-900">{professional.name}</p>
+                      <p className="text-xs text-indigo-700">{professional.role}</p>
+                    </div>
+                    <span className="text-[11px] font-medium text-indigo-600">{professional.location}</span>
+                  </button>
+                ))}
+              </div>
             </motion.div>
           )}
         </div>
