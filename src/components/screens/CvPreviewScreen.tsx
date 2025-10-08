@@ -75,7 +75,7 @@ const CvPreviewScreen = ({ onBackToRecording, onBackToHome }: CvPreviewScreenPro
           </CardContent>
       </Card>
     </div>
-    <div className="border-t border-white/60 bg-gray-50/95 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
+    <div className="shrink-0 border-t border-white/60 bg-gray-50/95 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 backdrop-blur supports-[backdrop-filter]:bg-gray-50/70">
       <div className="space-y-3">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <Button className="flex items-center justify-center gap-2 rounded-full bg-emerald-600 py-3 text-white shadow transition hover:bg-emerald-700">
