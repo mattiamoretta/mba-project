@@ -1,4 +1,4 @@
-# Best MBA Project Ever
+# MBA Project
 
 A polished React single-page app that showcases the BestMbaProjectEver talent marketplace concept. The project is built with Vite + Tailwind CSS and mirrors a mobile-first product mockup while remaining production ready.
 
