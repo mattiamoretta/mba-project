@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 
@@ -44,42 +45,50 @@ const jobs = [
 ];
 
 const JobsScreen = ({ onBack }: JobsScreenProps) => (
-  <div className="p-4 flex-1 overflow-y-auto bg-gray-50">
-    <h2 className="text-xl font-bold mb-2 text-gray-800">Available Jobs</h2>
+  <div className="flex h-full flex-col bg-gray-50">
+    <div className="flex items-center justify-between gap-3 px-4 pb-3 pt-4">
+      <Button
+        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition duration-200 hover:shadow-xl"
+        onClick={onBack}
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Home
+      </Button>
+      <h2 className="text-lg font-bold text-gray-800">Available Jobs</h2>
+    </div>
 
-    <Card className="mb-4 overflow-hidden">
-      <CardContent className="p-0">
-        <div className="relative h-40 w-full bg-gradient-to-br from-blue-50 to-green-50">
-          <div className="absolute left-10 top-8 w-3 h-3 rounded-full bg-indigo-600 shadow" title="Milan" />
-          <div className="absolute left-40 top-16 w-3 h-3 rounded-full bg-emerald-600 shadow" title="Verona" />
-          <div className="absolute left-24 top-28 w-3 h-3 rounded-full bg-pink-600 shadow" title="Bologna" />
-          <div className="absolute right-10 top-12 w-3 h-3 rounded-full bg-yellow-600 shadow" title="Venice" />
-          <div className="absolute inset-x-0 bottom-0 bg-white/90 p-2 text-xs text-gray-700 flex items-center gap-2 border-t">
-            <span className="font-medium">Nearby demand:</span>
-            <span>• Electrician • Plumber • HVAC</span>
+    <div className="px-4 pb-4">
+      <Card className="overflow-hidden rounded-3xl border-0 shadow-md">
+        <CardContent className="p-0">
+          <div className="relative h-40 w-full bg-gradient-to-br from-blue-50 via-white to-green-50">
+            <div className="absolute left-10 top-8 h-3 w-3 rounded-full bg-indigo-600 shadow" title="Milan" />
+            <div className="absolute left-40 top-16 h-3 w-3 rounded-full bg-emerald-600 shadow" title="Verona" />
+            <div className="absolute left-24 top-28 h-3 w-3 rounded-full bg-pink-600 shadow" title="Bologna" />
+            <div className="absolute right-10 top-12 h-3 w-3 rounded-full bg-yellow-600 shadow" title="Venice" />
+            <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 border-t bg-white/90 p-2 text-xs text-gray-700">
+              <span className="font-medium">Nearby demand:</span>
+              <span>• Electrician • Plumber • HVAC</span>
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
-
-    {jobs.map((job) => (
-      <Card key={job.title} className="mb-4 hover:shadow-lg">
-        <CardContent className="p-5">
-          <h3 className="font-semibold text-lg">{job.title}</h3>
-          <p className="text-sm text-gray-500">
-            {job.company} • {job.location}
-          </p>
-          <Button className="mt-3 w-full rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Apply</Button>
         </CardContent>
       </Card>
-    ))}
+    </div>
 
-    <Button
-      className="mt-2 w-full rounded-xl border border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
-      onClick={onBack}
-    >
-      ⬅ Back to Home
-    </Button>
+    <div className="flex-1 space-y-4 overflow-y-auto px-4 pb-6">
+      {jobs.map((job) => (
+        <Card key={job.title} className="rounded-3xl border-0 bg-white/90 shadow-md transition hover:-translate-y-0.5 hover:shadow-lg">
+          <CardContent className="space-y-3 p-5">
+            <h3 className="text-lg font-semibold text-gray-800">{job.title}</h3>
+            <p className="text-sm text-gray-500">
+              {job.company} • {job.location}
+            </p>
+            <Button className="w-full rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 py-2 text-white shadow hover:brightness-110">
+              Apply now
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   </div>
 );
 
