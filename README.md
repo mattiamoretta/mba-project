@@ -1,47 +1,39 @@
-# MBA Project
+# Turn-Up
 
-A polished React single-page app that showcases the BestMbaProjectEver talent marketplace concept. The project is built with Vite + Tailwind CSS and mirrors a mobile-first product mockup while remaining production ready.
+Turn-Up is verified hiring infrastructure for Italian hospitality: a public product story at `/` and a guided, authenticated product experience at `/app`.
 
-## Getting started
+## Experience architecture
 
-```bash
-npm install
-npm run dev
+- `/` is the public marketing surface, written in Italian for workers and hiring teams.
+- `/app` is dynamic and protected by dispatch-owned Sign in with ChatGPT.
+- The app supports worker and employer perspectives, a first-run guided tour, explained matches, activity tracking, profile/account controls, and responsive navigation.
+- Generated brand imagery and the social card live in `public/`.
+
+Turn-Up facilitates verified matching and contractual clarity. The employer remains responsible for the employment relationship, signature, and mandatory government communications.
+
+## Stack
+
+- React 19.2 and Next 16.3 on the Vinext/Cloudflare Sites runtime
+- Motion 13 for interaction and transition choreography
+- Tailwind CSS 4.3 build pipeline with product-specific CSS tokens
+- Lucide 1.33 for the interface icon system
+- TypeScript 5.9
+
+The runtime integration packages that are pinned by Sites remain on the platform-verified versions.
+
+## Local checks
+
+Node.js `>=22.13.0` is required.
+
+```sh
+npm run lint
+npm test
 ```
 
-Open http://localhost:5173 to explore the mockup.
+`npm test` builds the deployable artifact and verifies the rendered Turn-Up metadata and primary marketing message. `npm run dev` starts the Vite/Vinext development server.
 
-## Build
+## Authentication
 
-```bash
-npm run build
-```
+`app/chatgpt-auth.ts` contains the approved helpers for dispatch-owned ChatGPT sign-in. The protected route calls `requireChatGPTUser("/app")`, while the public landing remains anonymous-compatible. The dispatcher owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, and `/callback`.
 
-The generated production bundle lives in `dist/`.
-
-To refresh the static bundle that GitHub Pages serves from the `docs/` folder run:
-
-```bash
-npm run build:pages
-```
-
-This command writes the production build to `docs/` with the correct `/mba-project/` base path so it can be published directly from the main branch.
-
-## Deploying to GitHub Pages
-
-The build is configured to publish to the `/mba-project/` subdirectory that GitHub Pages uses for the project site.
-
-### Option 1: Serve from the `docs/` folder on `main`
-
-1. Run `npm run build:pages` to regenerate `docs/`.
-2. Commit and push the updated `docs/` folder.
-3. Configure GitHub Pages to use the `docs/` folder on the `main` branch as the publishing source.
-
-### Option 2: Deploy to the `gh-pages` branch
-
-```bash
-npm run build
-npm run deploy
-```
-
-The deploy script pushes the compiled `dist/` folder to the `gh-pages` branch using `gh-pages`.
+Never add custom implementations for those reserved routes or expose authentication headers to the client beyond the minimal display name and email passed by the server route.
