@@ -1,6 +1,17 @@
-# MBA Project
+# Turn-Up
 
-A polished React single-page app that showcases the BestMbaProjectEver talent marketplace concept. The project is built with Vite + Tailwind CSS and mirrors a mobile-first product mockup while remaining production ready.
+An interactive React prototype of the hiring infrastructure for Italian HoReCa. Turn-Up combines a portable verified worker identity, deterministic real-time matching, and a native compliance journey for workers and employers.
+
+The prototype includes:
+
+- worker and employer experiences, switchable from the header;
+- multilingual worker onboarding entry points;
+- explainable matches based on declared role, location, availability, and badge criteria;
+- credential verification and portable reputation;
+- vacancy posting, candidate unlock, messaging, and confirmed-hire flow;
+- CCNL-aware contract summaries, pre-employment reminders, and a transparent hiring trail.
+
+All data and transactions are demonstrative. The prototype does not sign contracts, submit mandatory communications, or make automated hiring decisions.
 
 ## Getting started
 
